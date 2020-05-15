@@ -23,8 +23,26 @@ class Environment {
     });
   }
 
-  get(key: string): any {
+  get(key: string): any | undefined {
     return process.env[key];
+  }
+
+  getAsInt(key: string): number | undefined {
+    if (process.env[key] === undefined) {
+      return;
+    }
+
+    const value = parseInt(process.env[key] || '');
+
+    if (isNaN(value)) {
+      throw new Error(`Cannot cast ${key} value to int`);
+    }
+
+    return value;
+  }
+
+  getAsBool(key: string): boolean {
+    return (process.env[key] || '').toLowerCase() === 'true';
   }
 }
 
