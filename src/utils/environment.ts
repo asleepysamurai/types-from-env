@@ -11,8 +11,9 @@ import * as path from 'path';
 class Environment {
   constructor() {
     const defaultEnvironment = 'development';
-    const environmentFileDir = (env: string): string =>
-      path.resolve(__dirname, `../../config/${env}.env`);
+    const environmentFileDir = (env: string): string => {
+      return path.resolve(__dirname, `../../config/${env}.env`);
+    };
 
     dotenv.config({
       path: environmentFileDir(process.env.NODE_ENV || defaultEnvironment),
