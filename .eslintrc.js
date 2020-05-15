@@ -21,5 +21,7 @@ module.exports = {
     curly: ERROR,
     'brace-style': [WARN, '1tbs', { allowSingleLine: false }],
     'arrow-body-style': [ERROR, 'always'],
+    '@typescript-eslint/no-unused-vars-experimental': ERROR,
+    'no-unused-vars': OFF,
   },
 };
