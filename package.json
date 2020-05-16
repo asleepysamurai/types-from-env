@@ -1,21 +1,23 @@
 {
-  "name": "base",
+  "name": "types-from-env",
   "version": "0.0.1",
-  "description": "Scaffolding for a basic Typescript poject",
-  "main": "dist/src/index.js",
-  "repository": "git@github.com:asleepysamurai/ts-scaffold-base.git",
+  "description": "Generate typescript types from dotenv keys",
+  "main": "dist/index.js",
+  "bin": {
+    "types-from-env": "dist/index.js"
+  },
+  "repository": "git@github.com:asleepysamurai/types-from-env.git",
   "author": "Balaganesh Damodaran <asleepysamurai@gmail.com>",
-  "license": "UNLICENSED",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "x": " ",
-    "prep": "rimraf dist && mkdir -p dist && cp tsconfig.json ./dist && cp -r config ./dist/",
+    "prepublishOnly": "rm -rf dist && tsc && chmod +x dist/index.js",
     "build:run": "tsc && yarn run:standard",
     "build:watch:run": "tsc-watch --noClear --onSuccess \"yarn run:inspect\"",
     "build:watch:run-brk": "tsc-watch --noClear --onSuccess \"yarn run:inspect-brk\"",
-    "run:standard": "cd dist && env NODE_ENV=development node -r tsconfig-paths/register ./src/index.js",
-    "run:inspect": "cd dist && env NODE_ENV=development node --inspect -r tsconfig-paths/register ./src/index.js",
-    "run:inspect-brk": "cd dist && env NODE_ENV=development node --inspect-brk -r tsconfig-paths/register ./src/index.js",
+    "run:standard": "cd dist && env NODE_ENV=development node ./index.js",
+    "run:inspect": "cd dist && env NODE_ENV=development node --inspect ./index.js",
+    "run:inspect-brk": "cd dist && env NODE_ENV=development node --inspect-brk ./index.js",
     "start": "yarn prep && yarn build:run",
     "start:inspect": "yarn prep && yarn build:watch:run",
     "start:inspect-brk": "yarn prep && yarn build:watch:run-brk"
@@ -31,7 +33,6 @@
     "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.2",
     "tsc-watch": "^4.2.5",
-    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.2"
   },
   "husky": {
